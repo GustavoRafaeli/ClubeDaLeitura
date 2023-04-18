@@ -41,6 +41,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
         }
         public void InserirNovoAmigo()
         {
+            ListarAmigo();
             Amigo novoAmigo = ObterAmigo();
 
             cadastroAmigo.Criar(novoAmigo);
@@ -49,6 +50,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
         }
         public void EditarAmigo()
         {
+            ListarAmigo();
             int idSelecionado = ReceberIdAmigo();
             Amigo amigoAtualizado = ObterAmigo();
 
@@ -58,7 +60,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
         }
         public void ListarAmigo()
         {
-            List<Amigo> listaAmigos = cadastroAmigo.SelecionarTodos();
+            ArrayList listaAmigos = cadastroAmigo.SelecionarTodos();
 
             Console.Clear();
 
@@ -72,21 +74,20 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
                 return;
             }
 
-            foreach (var amigo in listaAmigos)
+            foreach (Amigo amigo in listaAmigos)
             {
                 Console.WriteLine("{0,-5}|{1,-12}|{2,-13}|{3,-10}|{4,-12}|", amigo.Id, amigo.Nome, amigo.NomeDoResponsavel, amigo.Telefone, amigo.Endereco);
             }
-
+            Console.WriteLine();
             Console.ReadKey();
         }
-
         public void DeletarAmigo()
         {
+            ListarAmigo();
             int idSelecionado = ReceberIdAmigo();
             cadastroAmigo.Deletar(idSelecionado);
             Mensagem.ApresentarMensagem("Amigo excluído com sucesso!", ConsoleColor.Green);
         }
-
         public int ReceberIdAmigo()
         {
             bool idInvalido;
@@ -96,7 +97,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
                 Console.WriteLine("Digite o id do amigo: ");
                 id = int.Parse(Console.ReadLine());
 
-                idInvalido = cadastroAmigo.SelecionarAmigoPorId(id) == null;
+                idInvalido = cadastroAmigo.SelecionarPorId(id) == null;
 
                 if (idInvalido)
                 {

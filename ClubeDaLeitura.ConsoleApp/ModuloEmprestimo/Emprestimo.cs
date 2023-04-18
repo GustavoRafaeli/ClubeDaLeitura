@@ -26,5 +26,14 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             DataDeDevolucao = dataDeDevolucao;
             Status = status;
         }
+        public override void Atualizar(Entidade registroAtualizado)
+        {
+            Emprestimo emprestimo = (Emprestimo)registroAtualizado;
+
+            AmigoQuePegouARevista = emprestimo.AmigoQuePegouARevista;
+            RevistaEmprestada = emprestimo.RevistaEmprestada;
+            DataDoEmprestimo = emprestimo.DataDoEmprestimo;
+            DataDeDevolucao = emprestimo.DataDoEmprestimo;
+        }
     }
 }

@@ -22,5 +22,15 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
             Telefone = telefone;
             Endereco = endereço;
         }
+
+        public override void Atualizar(Entidade registroAtualizado)
+        {
+            Amigo amigo = (Amigo)registroAtualizado;
+
+            Nome = amigo.Nome;
+            NomeDoResponsavel = amigo.NomeDoResponsavel;
+            Telefone = amigo.Telefone;
+            Endereco = amigo.Endereco;
+        }
     }
 }

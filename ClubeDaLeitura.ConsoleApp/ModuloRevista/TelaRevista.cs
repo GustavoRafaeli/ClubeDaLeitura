@@ -1,6 +1,7 @@
 ﻿using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,11 +55,11 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
         {
             int idSelecionado = ReceberIdRevista();
 
-            foreach (var revista in cadastroRevista.Revistas)
+            foreach (Revista revista in cadastroRevista.Cadastros)
             {
                 if (revista.Id == idSelecionado)
                 {
-                    foreach (var caixa in cadastroCaixa.Caixas)
+                    foreach (Caixa caixa in cadastroCaixa.Cadastros)
                     {
                         if (revista.CaixaOndeEstaGuardada.Id == caixa.Id)
                         {
@@ -76,7 +77,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
         }
         public void ListarRevista()
         {
-            List<Revista> listaRevistas = cadastroRevista.SelecionarTodos();
+            ArrayList listaRevistas = cadastroRevista.SelecionarTodos();
 
             Console.Clear();
 
@@ -90,7 +91,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
                 return;
             }
 
-            foreach (var revista in listaRevistas)
+            foreach (Revista revista in listaRevistas)
             {
                 Console.WriteLine("{0,-5}|{1,-13}|{2,-13}|{3,-11}|", revista.Id, revista.TipoColecao, revista.AnoDaRevista, revista.CaixaOndeEstaGuardada.Id);
             }
@@ -102,11 +103,11 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
         {
             int idSelecionado = ReceberIdRevista();
 
-            foreach (var revista in cadastroRevista.Revistas)
+            foreach (Revista revista in cadastroRevista.Cadastros)
             {
                 if (revista.Id == idSelecionado)
                 {
-                    foreach (var caixa in cadastroCaixa.Caixas)
+                    foreach (Caixa caixa in cadastroCaixa.Cadastros)
                     {
                         if (revista.CaixaOndeEstaGuardada.Id == caixa.Id)
                         {
@@ -129,7 +130,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
                 Console.WriteLine("Digite o id da revista: ");
                 id = int.Parse(Console.ReadLine());
 
-                idInvalido = cadastroRevista.SelecionarRevistaPorId(id) == null;
+                idInvalido = cadastroRevista.SelecionarPorId(id) == null;
 
                 if (idInvalido)
                 {
@@ -155,7 +156,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
 
             Caixa caixa = null;
 
-            foreach (Caixa c in cadastroCaixa.Caixas)
+            foreach (Caixa c in cadastroCaixa.Cadastros)
             {
                 if (idDaCaixa == c.Id)
                 {
@@ -168,7 +169,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
                 Console.WriteLine("Digite o id da caixa que a revista pertence: ");
                 idDaCaixa = int.Parse(Console.ReadLine());
 
-                foreach (Caixa c in cadastroCaixa.Caixas)
+                foreach (Caixa c in cadastroCaixa.Cadastros)
                 {
                     if (idDaCaixa == c.Id)
                     {

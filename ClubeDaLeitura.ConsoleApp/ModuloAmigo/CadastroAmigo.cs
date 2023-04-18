@@ -10,52 +10,43 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
 {
     public class CadastroAmigo : Cadastro
     {
-        public List<Amigo> Amigos = new List<Amigo>();
-        
-        
+        //public void CadastrarAmigo(Amigo amigo)
+        //{
+        //    Cadastros.Add(amigo);
+        //}
+        //public void Criar(Amigo amigo)
+        //{
+        //    CadastrarAmigo(amigo);
+        //    ContadorId++;
+        //}
+        //public void Editar(int idEditar, Amigo amigoAtualizado)
+        //{
+        //    Amigo amigo = SelecionarAmigoPorId(idEditar);
+        //    amigo.Atualizar(amigoAtualizado);
+        //}
+        //public void Deletar(int id)
+        //{
+        //    Amigo amigo = SelecionarAmigoPorId(id);
+        //    Cadastros.Remove(amigo);
+        //}
+        //public ArrayList SelecionarTodos()
+        //{
+        //    return Cadastros;
+        //}
+        //public Amigo SelecionarPorId(int id)
+        //{
+        //    Amigo amigo = null;
 
-        public void CadastrarAmigo(Amigo amigo)
-        {
-            Amigos.Add(amigo);
-        }
-        
-        public void Criar(Amigo amigo)
-        {
-            CadastrarAmigo(amigo);
-            ContadorId++;
-        }
-        public void Editar(int idEditar, Amigo amigoAtualizado)
-        {
-            Amigo amigo = SelecionarAmigoPorId(idEditar);
+        //    foreach (Amigo a in Cadastros)
+        //    {
+        //        if (a.Id == id)
+        //        {
+        //            amigo = a;
+        //            break;
+        //        }
+        //    }
 
-            amigo.Nome = amigoAtualizado.Nome;
-            amigo.NomeDoResponsavel = amigoAtualizado.NomeDoResponsavel;
-            amigo.Telefone = amigoAtualizado.Telefone;
-            amigo.Endereco = amigoAtualizado.Endereco;
-        }
-        public void Deletar(int id)
-        {
-            Amigo amigo = SelecionarAmigoPorId(id);
-            Amigos.Remove(amigo);
-        }
-        public List<Amigo> SelecionarTodos()
-        {
-            return Amigos;
-        }
-        public Amigo SelecionarAmigoPorId(int id)
-        {
-            Amigo amigo = null;
-
-            foreach (Amigo a in Amigos)
-            {
-                if (a.Id == id)
-                {
-                    amigo = a;
-                    break;
-                }
-            }
-
-            return amigo;
-        }
+        //    return amigo;
+        //}
     }
 }

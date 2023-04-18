@@ -22,5 +22,14 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
             Etiqueta = etiqueta;
             Numero = numero;
         }
+
+        public override void Atualizar(Entidade registroAtualizado)
+        {
+            Caixa caixa = (Caixa)registroAtualizado;
+
+            Cor = caixa.Cor;
+            Etiqueta = caixa.Etiqueta;
+            Numero = caixa.Numero;
+        }
     }
 }

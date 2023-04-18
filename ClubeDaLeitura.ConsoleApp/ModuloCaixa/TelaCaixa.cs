@@ -1,5 +1,6 @@
 ﻿using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,15 +42,16 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
         }
         public void InserirNovaCaixa()
         {
+            ListarCaixa();
             Caixa novaCaixa = ObterCaixa();
 
             cadastroCaixa.Criar(novaCaixa);
 
             Mensagem.ApresentarMensagem("Caixa criada com sucesso!", ConsoleColor.Green);
         }
-
         public void EditarCaixa()
         {
+            ListarCaixa();
             int idSelecionado = ReceberIdCaixa();
             Caixa caixaAtualizada = ObterCaixa();
 
@@ -60,7 +62,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
         }
         public void ListarCaixa()
         {
-            List<Caixa> listaCaixas = cadastroCaixa.SelecionarTodos();
+            ArrayList listaCaixas = cadastroCaixa.SelecionarTodos();
 
             Console.Clear();
 
@@ -74,20 +76,20 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
                 return;
             }
 
-            foreach (var caixa in listaCaixas)
+            foreach (Caixa caixa in listaCaixas)
             {
                 Console.WriteLine("{0,-7}|{1,-12}|{2,-11}|{3,-10}|", caixa.Id, caixa.Etiqueta, caixa.Cor, caixa.Numero);
             }
+            Console.WriteLine();
             Console.ReadKey();
         }
-
         public void DeletarCaixa()
         {
+            ListarCaixa();
             int numeroSelecionado = ReceberIdCaixa();
             cadastroCaixa.Deletar(numeroSelecionado);
             Mensagem.ApresentarMensagem("Caixa excluída com sucesso!", ConsoleColor.Green);
         }
-
         public int ReceberIdCaixa()
         {
             bool idInvalido;
@@ -97,7 +99,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
                 Console.WriteLine("Digite o id da caixa: ");
                 id = int.Parse(Console.ReadLine());
 
-                idInvalido = cadastroCaixa.SelecionarCaixaPorId(id) == null;
+                idInvalido = cadastroCaixa.SelecionarPorId(id) == null;
 
                 if (idInvalido)
                 {

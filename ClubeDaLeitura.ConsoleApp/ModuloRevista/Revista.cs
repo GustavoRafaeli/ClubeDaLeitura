@@ -23,5 +23,14 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
             AnoDaRevista = anoDaRevista;
             CaixaOndeEstaGuardada = caixaOndeEstaGuardada;
         }
+        public override void Atualizar(Entidade registroAtualizado)
+        {
+            Revista revista = (Revista)registroAtualizado;
+
+            TipoColecao = revista.TipoColecao;
+            NumeroDaEdicao = revista.NumeroDaEdicao;
+            AnoDaRevista = revista.AnoDaRevista;
+            CaixaOndeEstaGuardada = revista.CaixaOndeEstaGuardada;
+        }
     }
 }

@@ -33,7 +33,6 @@ namespace ClubeDaLeitura.ConsoleApp
 
                 string opcao = Console.ReadLine().ToUpper();
 
-
                 switch (opcao)
                 {
                     case "1": MenuEmprestimo(); break;

@@ -9,5 +9,10 @@ namespace ClubeDaLeitura.ConsoleApp.Compartilhado
     public class Entidade
     {
         public int Id;
+
+        public virtual void Atualizar(Entidade registroAtualizado)
+        {
+            Id = registroAtualizado.Id;
+        }
     }
 }

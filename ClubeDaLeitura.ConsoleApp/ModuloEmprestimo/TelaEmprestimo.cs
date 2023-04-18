@@ -2,6 +2,7 @@
 using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 using ClubeDaLeitura.ConsoleApp.ModuloRevista;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -65,7 +66,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
         }
         public void ListarEmprestimo()
         {
-            List<Emprestimo> listaEmprestimo = cadastroEmprestimo.SelecionarTodos();
+            ArrayList listaEmprestimo = cadastroEmprestimo.SelecionarTodos();
 
             Console.Clear();
 
@@ -79,7 +80,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
                 return;
             }
 
-            foreach (var emprestimo in listaEmprestimo)
+            foreach (Emprestimo emprestimo in listaEmprestimo)
             {
                 Console.WriteLine("{0,-5}|{1,-11}|{2,-11}|{3,-20}|{4,-18}|{5,-10}|", emprestimo.Id, emprestimo.AmigoQuePegouARevista.Nome, emprestimo.RevistaEmprestada.TipoColecao, emprestimo.DataDoEmprestimo, emprestimo.DataDeDevolucao, emprestimo.Status);
             }
@@ -98,10 +99,10 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             int id;
             do
             {
-                Console.WriteLine("Digite o id do emnprestimo: ");
+                Console.WriteLine("Digite o id do emprestimo: ");
                 id = int.Parse(Console.ReadLine());
 
-                idInvalido = cadastroAmigo.SelecionarAmigoPorId(id) == null;
+                idInvalido = cadastroAmigo.SelecionarPorId(id) == null;
 
                 if (idInvalido)
                 {
@@ -131,14 +132,14 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             Amigo amigo = null;
             Revista revista = null;
 
-            foreach (Amigo a in cadastroAmigo.Amigos)
+            foreach (Amigo a in cadastroAmigo.Cadastros)
             {
                 if (idAmigo == a.Id)
                 {
                     amigo = a;
                 }
             }
-            foreach (Revista r in cadastroRevista.Revistas)
+            foreach (Revista r in cadastroRevista.Cadastros)
             {
                 if (idRevistaEmprestada == r.Id)
                 {
@@ -156,7 +157,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 
             Emprestimo emprestimo = null;
 
-            foreach (Emprestimo e in cadastroEmprestimo.Emprestimos)
+            foreach (Emprestimo e in cadastroEmprestimo.Cadastros)
             {
                 if (idFechar == e.Id)
                 {
@@ -164,7 +165,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
                 }
             }
             cadastroEmprestimo.FecharStatus(emprestimo);
-            Mensagem.ApresentarMensagem("Ëmprestimo Fechado com Sucesso !", ConsoleColor.Green);
+            Mensagem.ApresentarMensagem("Emprestimo Fechado com Sucesso !", ConsoleColor.Green);
         }
     }
 }
