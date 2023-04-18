@@ -1,4 +1,5 @@
-﻿using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
+﻿using ClubeDaLeitura.ConsoleApp.Compartilhado;
+using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 using ClubeDaLeitura.ConsoleApp.ModuloRevista;
 using System;
@@ -11,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 {
-    public class TelaEmprestimo
+    public class TelaEmprestimo : Tela
     {
         public CadastroAmigo cadastroAmigo = null;
         public CadastroEmprestimo cadastroEmprestimo = null;
         public CadastroRevista cadastroRevista = null;
 
-        public string ApresentarMenuEmprestimo()
+        public string ApresentarMenu()
         {
             Console.Clear();
             while (true)
@@ -26,7 +27,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
                 Console.WriteLine("(1) Criar Emprestimo");
                 Console.WriteLine("(2) Editar Emprestimo");
                 Console.WriteLine("(3) Deletar Emprestimo");
-                Console.WriteLine("(4) Listar Emprestimo");
+                Console.WriteLine("(4) Listar Emprestimos");
                 Console.WriteLine("(5) Fechar Emprestimo");
                 Console.WriteLine("(S) Voltar ao Menu Principal");
 
@@ -49,20 +50,22 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
         }
         public void InserirNovoEmprestimo()
         {
+            ListarEmprestimo();
             Emprestimo novoEmprestimo = ObterEmprestimo();
 
             cadastroEmprestimo.Criar(novoEmprestimo);
 
-            Mensagem.ApresentarMensagem("Emprestimo criado com sucesso!", ConsoleColor.Green);
+            ApresentarMensagem("Emprestimo criado com sucesso!", ConsoleColor.Green);
         }
         public void EditarEmprestimo()
         {
+            ListarEmprestimo();
             int idSelecionado = ReceberIdEmprestimo();
             Emprestimo emprestimoAtualizado = ObterEmprestimo();
 
             cadastroEmprestimo.Editar(idSelecionado, emprestimoAtualizado);
 
-            Mensagem.ApresentarMensagem("Emprestimo editado com sucesso!", ConsoleColor.Green);
+            ApresentarMensagem("Emprestimo editado com sucesso!", ConsoleColor.Green);
         }
         public void ListarEmprestimo()
         {
@@ -76,7 +79,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 
             if (listaEmprestimo.Count == 0)
             {
-                Mensagem.ApresentarMensagem("Nenhum emprestimo cadastrado!", ConsoleColor.DarkYellow);
+                ApresentarMensagem("Nenhum emprestimo cadastrado!", ConsoleColor.DarkYellow);
                 return;
             }
 
@@ -84,14 +87,15 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             {
                 Console.WriteLine("{0,-5}|{1,-11}|{2,-11}|{3,-20}|{4,-18}|{5,-10}|", emprestimo.Id, emprestimo.AmigoQuePegouARevista.Nome, emprestimo.RevistaEmprestada.TipoColecao, emprestimo.DataDoEmprestimo, emprestimo.DataDeDevolucao, emprestimo.Status);
             }
-
+            Console.WriteLine();
             Console.ReadKey();
         }
         public void DeletarEmprestimo()
         {
+            ListarEmprestimo();
             int idSelecionado = ReceberIdEmprestimo();
             cadastroEmprestimo.Deletar(idSelecionado);
-            Mensagem.ApresentarMensagem("Emprestimo excluído com sucesso!", ConsoleColor.Green);
+            ApresentarMensagem("Emprestimo excluído com sucesso!", ConsoleColor.Green);
         }
         public int ReceberIdEmprestimo()
         {
@@ -165,7 +169,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
                 }
             }
             cadastroEmprestimo.FecharStatus(emprestimo);
-            Mensagem.ApresentarMensagem("Emprestimo Fechado com Sucesso !", ConsoleColor.Green);
+            ApresentarMensagem("Emprestimo Fechado com Sucesso !", ConsoleColor.Green);
         }
     }
 }

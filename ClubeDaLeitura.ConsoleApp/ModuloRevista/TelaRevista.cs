@@ -1,4 +1,5 @@
-﻿using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
+﻿using ClubeDaLeitura.ConsoleApp.Compartilhado;
+using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 using System;
 using System.Collections;
@@ -9,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
 {
-    public class TelaRevista
+    public class TelaRevista : Tela
     {
         public CadastroCaixa cadastroCaixa = null;
         public CadastroRevista cadastroRevista = null;
 
-        public string ApresentarMenuRevista()
+        public string ApresentarMenu()
         {
             Console.Clear();
             while (true)
@@ -23,7 +24,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
                 Console.WriteLine("(1) Criar Revista");
                 Console.WriteLine("(2) Editar Revista");
                 Console.WriteLine("(3) Deletar Revista");
-                Console.WriteLine("(4) Listar Revista");
+                Console.WriteLine("(4) Listar Revistas");
                 Console.WriteLine("(S) Voltar ao Menu Principal");
 
                 string opcao = Console.ReadLine().ToUpper();
@@ -44,15 +45,16 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
         }
         public void InserirNovaRevista()
         {
+            ListarRevista();
             Revista novaRevista = ObterRevista();
 
             cadastroRevista.Criar(novaRevista);
 
-            Mensagem.ApresentarMensagem("Revista criada com sucesso!", ConsoleColor.Green);
+            ApresentarMensagem("Revista criada com sucesso!", ConsoleColor.Green);
         }
-
         public void EditarRevista()
         {
+            ListarRevista();
             int idSelecionado = ReceberIdRevista();
 
             foreach (Revista revista in cadastroRevista.Cadastros)
@@ -73,7 +75,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
 
             cadastroRevista.Editar(idSelecionado, revistaAtualizada);
 
-            Mensagem.ApresentarMensagem("Revista editada com sucesso!", ConsoleColor.Green);
+            ApresentarMensagem("Revista editada com sucesso!", ConsoleColor.Green);
         }
         public void ListarRevista()
         {
@@ -87,7 +89,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
 
             if (listaRevistas.Count == 0)
             {
-                Mensagem.ApresentarMensagem("Nenhuma revista cadastrada!", ConsoleColor.DarkYellow);
+                ApresentarMensagem("Nenhuma revista cadastrada!", ConsoleColor.DarkYellow);
                 return;
             }
 
@@ -95,12 +97,12 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
             {
                 Console.WriteLine("{0,-5}|{1,-13}|{2,-13}|{3,-11}|", revista.Id, revista.TipoColecao, revista.AnoDaRevista, revista.CaixaOndeEstaGuardada.Id);
             }
-
+            Console.WriteLine();
             Console.ReadKey();
         }
-
         public void DeletarRevista()
         {
+            ListarRevista();
             int idSelecionado = ReceberIdRevista();
 
             foreach (Revista revista in cadastroRevista.Cadastros)
@@ -118,9 +120,8 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
             }
 
             cadastroRevista.Deletar(idSelecionado);
-            Mensagem.ApresentarMensagem("Revista excluída com sucesso!", ConsoleColor.Green);
+            ApresentarMensagem("Revista excluída com sucesso!", ConsoleColor.Green);
         }
-
         public int ReceberIdRevista()
         {
             bool idInvalido;
@@ -134,7 +135,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
 
                 if (idInvalido)
                 {
-                    Mensagem.ApresentarMensagem("id Inválido, tente novamente", ConsoleColor.Red);
+                    ApresentarMensagem("id Inválido, tente novamente", ConsoleColor.Red);
                 }
             } while (idInvalido);
 
@@ -165,7 +166,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
             }
             while (caixa == null)
             {
-                Mensagem.ApresentarMensagem("Caixa inexistente!", ConsoleColor.Red);
+                ApresentarMensagem("Caixa inexistente!", ConsoleColor.Red);
                 Console.WriteLine("Digite o id da caixa que a revista pertence: ");
                 idDaCaixa = int.Parse(Console.ReadLine());
 

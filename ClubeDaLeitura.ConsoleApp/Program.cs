@@ -9,6 +9,7 @@ namespace ClubeDaLeitura.ConsoleApp
     {
         static void Main(string[] args)
         {
+            #region //Instâncias
             CadastroCaixa cadastroCaixa = new CadastroCaixa();
             CadastroAmigo cadastroAmigo = new CadastroAmigo();
             CadastroEmprestimo cadastroEmprestimo = new CadastroEmprestimo();
@@ -35,8 +36,8 @@ namespace ClubeDaLeitura.ConsoleApp
             menu.telaEmprestimo = telaEmprestimo;
             menu.telaCaixa = telaCaixa;
             menu.telaRevista = telaRevista;
-
-
+            #endregion
+            #region //Adicionando REGISTROS
             //ADICIONANDO CAIXAS
             //-------------------------------------------------------------------------------------
             Caixa caixa0 = new Caixa(0, "Verde", "Ação", 0);
@@ -74,9 +75,8 @@ namespace ClubeDaLeitura.ConsoleApp
             cadastroEmprestimo.Cadastros.Add(new Emprestimo(2, amigo2, revista0, "14/04", "24/04", "EM ABERTO"));
             cadastroEmprestimo.Cadastros.Add(new Emprestimo(3, amigo3, revista0, "14/04", "24/04", "EM ABERTO"));
             //-------------------------------------------------------------------------------------
-
+            #endregion
             menu.ExecutarMenuPrincipal();
-
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClubeDaLeitura.ConsoleApp.Compartilhado;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
 {
-    public class TelaAmigo
+    public class TelaAmigo : Tela
     {
         public CadastroAmigo cadastroAmigo = null;
 
-        public string ApresentarMenuAmigo()
+        public string ApresentarMenu()
         {
             Console.Clear();
             while (true)
@@ -28,37 +29,37 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
                 return opcao;
             }
         }
-        public void SelecionarOpcaoAmigo(string opcao)
+        public void SelecionarOpcao(string opcao)
         {
             switch (opcao)
             {
-                case "1": InserirNovoAmigo(); break;
-                case "2": EditarAmigo(); break;
-                case "3": DeletarAmigo(); break;
-                case "4": ListarAmigo(); break;
+                case "1": Inserir(); break;
+                case "2": Editar(); break;
+                case "3": Deletar(); break;
+                case "4": Listar(); break;
                 case "S": Menu.VoltarAoMenu(); break;
             }
         }
-        public void InserirNovoAmigo()
+        public void Inserir()
         {
-            ListarAmigo();
+            Listar();
             Amigo novoAmigo = ObterAmigo();
 
             cadastroAmigo.Criar(novoAmigo);
 
-            Mensagem.ApresentarMensagem("Amigo criado com sucesso!", ConsoleColor.Green);
+            ApresentarMensagem("Amigo criado com sucesso!", ConsoleColor.Green);
         }
-        public void EditarAmigo()
+        public void Editar()
         {
-            ListarAmigo();
+            Listar();
             int idSelecionado = ReceberIdAmigo();
             Amigo amigoAtualizado = ObterAmigo();
 
             cadastroAmigo.Editar(idSelecionado, amigoAtualizado);
 
-            Mensagem.ApresentarMensagem("Amigo editado com sucesso!", ConsoleColor.Green);
+           ApresentarMensagem("Amigo editado com sucesso!", ConsoleColor.Green);
         }
-        public void ListarAmigo()
+        public void Listar()
         {
             ArrayList listaAmigos = cadastroAmigo.SelecionarTodos();
 
@@ -70,7 +71,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
 
             if (listaAmigos.Count == 0)
             {
-                Mensagem.ApresentarMensagem("Nenhum amigo cadastrado!", ConsoleColor.DarkYellow);
+                ApresentarMensagem("Nenhum amigo cadastrado!", ConsoleColor.DarkYellow);
                 return;
             }
 
@@ -81,12 +82,12 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
             Console.WriteLine();
             Console.ReadKey();
         }
-        public void DeletarAmigo()
+        public void Deletar()
         {
-            ListarAmigo();
+            Listar();
             int idSelecionado = ReceberIdAmigo();
             cadastroAmigo.Deletar(idSelecionado);
-            Mensagem.ApresentarMensagem("Amigo excluído com sucesso!", ConsoleColor.Green);
+            ApresentarMensagem("Amigo excluído com sucesso!", ConsoleColor.Green);
         }
         public int ReceberIdAmigo()
         {

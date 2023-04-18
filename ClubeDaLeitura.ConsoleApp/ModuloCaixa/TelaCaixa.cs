@@ -1,4 +1,5 @@
-﻿using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
+﻿using ClubeDaLeitura.ConsoleApp.Compartilhado;
+using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 {
-    public class TelaCaixa
+    public class TelaCaixa : Tela
     {
         public CadastroCaixa cadastroCaixa = null;
 
-        public string ApresentarMenuCaixa()
+        public string ApresentarMenu()
         {
             Console.Clear();
             while (true)
@@ -21,7 +22,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
                 Console.WriteLine("(1) Criar Caixa");
                 Console.WriteLine("(2) Editar Caixa");
                 Console.WriteLine("(3) Deletar Caixa");
-                Console.WriteLine("(4) Listar Caixa");
+                Console.WriteLine("(4) Listar Caixas");
                 Console.WriteLine("(S) Voltar ao Menu Principal");
 
                 string opcao = Console.ReadLine().ToUpper();
@@ -47,7 +48,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 
             cadastroCaixa.Criar(novaCaixa);
 
-            Mensagem.ApresentarMensagem("Caixa criada com sucesso!", ConsoleColor.Green);
+            ApresentarMensagem("Caixa criada com sucesso!", ConsoleColor.Green);
         }
         public void EditarCaixa()
         {
@@ -58,7 +59,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 
             cadastroCaixa.Editar(idSelecionado, caixaAtualizada);
 
-            Mensagem.ApresentarMensagem("Caixa editada com sucesso!", ConsoleColor.Green);
+            ApresentarMensagem("Caixa editada com sucesso!", ConsoleColor.Green);
         }
         public void ListarCaixa()
         {
@@ -72,7 +73,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 
             if (listaCaixas.Count == 0)
             {
-                Mensagem.ApresentarMensagem("Nenhuma caixa cadastrada!", ConsoleColor.DarkYellow);
+                ApresentarMensagem("Nenhuma caixa cadastrada!", ConsoleColor.DarkYellow);
                 return;
             }
 
@@ -88,7 +89,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
             ListarCaixa();
             int numeroSelecionado = ReceberIdCaixa();
             cadastroCaixa.Deletar(numeroSelecionado);
-            Mensagem.ApresentarMensagem("Caixa excluída com sucesso!", ConsoleColor.Green);
+            ApresentarMensagem("Caixa excluída com sucesso!", ConsoleColor.Green);
         }
         public int ReceberIdCaixa()
         {
@@ -103,7 +104,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 
                 if (idInvalido)
                 {
-                    Mensagem.ApresentarMensagem("Id Inválido, tente novamente", ConsoleColor.Red);
+                    ApresentarMensagem("Id Inválido, tente novamente", ConsoleColor.Red);
                 }
             } while (idInvalido);
 

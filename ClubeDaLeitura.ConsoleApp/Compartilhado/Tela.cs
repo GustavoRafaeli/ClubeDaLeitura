@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClubeDaLeitura.ConsoleApp
+namespace ClubeDaLeitura.ConsoleApp.Compartilhado
 {
-    public class Mensagem
+    public class Tela
     {
         public static void ApresentarMensagem(string mensagem, ConsoleColor cor)
         {

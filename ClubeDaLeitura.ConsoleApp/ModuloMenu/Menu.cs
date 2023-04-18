@@ -25,11 +25,13 @@ namespace ClubeDaLeitura.ConsoleApp
             while (true)
             {
                 Console.Clear();
+                Console.WriteLine("-------------------------------");
                 Console.WriteLine("(1) Gerenciar Emprestimo");
                 Console.WriteLine("(2) Gerenciar Amigos");
                 Console.WriteLine("(3) Gerenciar Caixas");
                 Console.WriteLine("(4) Gerenciar Revistas");
                 Console.WriteLine("(S) Sair");
+                Console.WriteLine("-------------------------------");
 
                 string opcao = Console.ReadLine().ToUpper();
 
@@ -47,7 +49,7 @@ namespace ClubeDaLeitura.ConsoleApp
         {
             while (true)
             {
-                string opcao = telaEmprestimo.ApresentarMenuEmprestimo();
+                string opcao = telaEmprestimo.ApresentarMenu();
                 telaEmprestimo.SelecionarOpcaoEmprestimo(opcao);
                 break;
             }
@@ -56,8 +58,8 @@ namespace ClubeDaLeitura.ConsoleApp
         {
             while (true)
             {
-                string opcao = telaAmigo.ApresentarMenuAmigo();
-                telaAmigo.SelecionarOpcaoAmigo(opcao);
+                string opcao = telaAmigo.ApresentarMenu();
+                telaAmigo.SelecionarOpcao(opcao);
                 break;
             }
         }
@@ -65,7 +67,7 @@ namespace ClubeDaLeitura.ConsoleApp
         {
             while (true)
             {
-                string opcao = telaCaixa.ApresentarMenuCaixa();
+                string opcao = telaCaixa.ApresentarMenu();
                 telaCaixa.SelecionarOpcaoCaixa(opcao);
                 break;
             }
@@ -74,7 +76,7 @@ namespace ClubeDaLeitura.ConsoleApp
         {
             while (true)
             {
-                string opcao = telaRevista.ApresentarMenuRevista();
+                string opcao = telaRevista.ApresentarMenu();
                 telaRevista.SelecionarOpcaoRevista(opcao);
                 break;
             }

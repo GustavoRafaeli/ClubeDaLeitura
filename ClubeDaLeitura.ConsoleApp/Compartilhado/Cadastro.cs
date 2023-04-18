@@ -11,7 +11,6 @@ namespace ClubeDaLeitura.ConsoleApp.Compartilhado
 {
     public class Cadastro
     {
-
         public ArrayList Cadastros = new ArrayList();
         public int ContadorId = 4;
 
